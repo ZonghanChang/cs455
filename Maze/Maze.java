@@ -1,7 +1,7 @@
-// Name:
-// USC loginid:
-// CS 455 PA3
-// Fall 2015
+//Name:Zonghan Chang
+//USC loginid:zonghanc
+//CS 455 PA3
+//Fall 2015
 
 
 import java.util.LinkedList;
@@ -45,12 +45,12 @@ public class Maze {
       Constructs a maze.
       @param mazeData the maze to search.  See general Maze comments for what
       goes in this array.
-
     */
    public Maze(boolean[][] mazeData)
    {
       maze = new boolean[mazeData.length][mazeData[0].length];
       visited = new boolean[mazeData.length][mazeData[0].length];
+      
       for(int i = 0;i < mazeData.length;i++){
     	  for(int j = 0;j < mazeData[0].length;j++){
     		  maze[i][j] = mazeData[i][j];
@@ -97,9 +97,7 @@ public class Maze {
       @return the maze path
     */
    public LinkedList<MazeCoord> getPath() {
-
       return path;  
-
    }
 
 
@@ -109,32 +107,39 @@ public class Maze {
     */
    public boolean search()  {      
       
-      return s(numRows() - 1, numCols() - 1);  
+      return recursiveSearch(numRows() - 1, numCols() - 1);  
       
    }
-   private boolean s(int row,int col){
-	   if(visited[0][0] == true){
-		   return true;
-	   }
+   private boolean recursiveSearch(int row,int col){
 	   if(row >= numRows() || col >= numCols() || row < 0 || col < 0){
 		   return false;
 	   }
-	   if(maze[row][col] == WALL){
-		   return false;
+	   // Check if the start point or end point has been visited
+	   // Start point visited means the maze has been searched and there is a path
+	   // End point visited means the maze has been searched and there is no path
+	   if(visited[0][0] == true){
+		   return true;
 	   }
 	   if(visited[row][col]){
 		   return false;
 	   }
+
+	   if(maze[row][col] == WALL){
+		   return false;
+	   }
+	   
+	   visited[row][col] = true;
+	   // There is a path
 	   if((row == 0 && col == 0)){
 		   path.add(new MazeCoord(row,col));
-		   visited[row][col] = true;
 		   return true;
 	   }
-	   visited[row][col] = true;
-	   boolean up = s(row - 1, col);
-	   boolean left = s(row, col - 1);
-	   boolean down = s(row + 1, col);
-	   boolean right = s(row, col + 1);
+	   
+	   boolean up = recursiveSearch(row - 1, col);
+	   boolean left = recursiveSearch(row, col - 1);
+	   boolean down = recursiveSearch(row + 1, col);
+	   boolean right = recursiveSearch(row, col + 1);
+	   
 	   boolean hasPath = up || left || down || right;
 	   if(hasPath){
 		   path.add(new MazeCoord(row,col));

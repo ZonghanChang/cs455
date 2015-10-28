@@ -1,7 +1,7 @@
-// Name:
-// USC loginid:
-// CS 455 PA3
-// Fall 2015
+//Name:Zonghan Chang
+//USC loginid:zonghanc
+//CS 455 PA3
+//Fall 2015
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -49,6 +49,7 @@ public class MazeComponent extends JComponent
    {
 		Graphics2D g2 = (Graphics2D) g;
 		Line2D.Double segment = new Line2D.Double();
+		// Add maze to component
 		for(int i = 0;i < maze.numRows();i++){
 			for(int j = 0;j < maze.numCols();j++){
 				if(maze.hasWallAt(new MazeCoord(i,j))){
@@ -68,6 +69,7 @@ public class MazeComponent extends JComponent
 			}
 		}
 		
+		// Add path to component
 		LinkedList<MazeCoord> path = maze.getPath();
 		ListIterator<MazeCoord> iter = path.listIterator();
 		MazeCoord start = null,end=null;

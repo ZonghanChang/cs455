@@ -1,5 +1,5 @@
-//Name:
-//USC loginid:
+//Name:Zonghan Chang
+//USC loginid:zonghanc
 //CS 455 PA3
 //Fall 2015
 
@@ -105,6 +105,7 @@ public class MazeViewer {
 	   if(in.hasNextLine()){
 		   line = in.nextLine();
 	   }
+	   // Read the size of the maze
 	   Scanner scan = new Scanner(line);
 	   if(scan.hasNextInt()){
 		   row = scan.nextInt();
@@ -116,7 +117,7 @@ public class MazeViewer {
 	   int rowNum = 0;
 	   while(in.hasNextLine()){
 		   line = in.nextLine();
-		   for(int i = 0;i<line.length();i++){
+		   for(int i = 0;i < line.length();i++){
 			   if(line.charAt(i) == '0'){
 				   data[rowNum][i] = false;
 			   }
